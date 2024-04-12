@@ -1,0 +1,4 @@
+tau_ampa: 5
+tau_nmda: 100
+tau_gabaa: 6
+tau_gabab: 150

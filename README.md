@@ -1,1 +1,3 @@
-# Amazing! I finally start my undergraduate thesis.
+# Serotonin Neuromodulation of Attention Modelling
+
+**Authors: Hlib Solodzhuk**

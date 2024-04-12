@@ -1,0 +1,14 @@
+C: 100 #membrane capacitance
+a: 0.01 #recovery time constant
+b: 5 #determines whether u is an amplifying (b < 0) or resonant (b > 0)
+c: -60 #voltage reset value
+d: 400 #total amount of outward minus inward currents activated during the spike and affecting the after-spike behavior
+
+v_r: -60 #resting membrane potential
+v_t: -50 #instantaneous threshold potential
+v_peak: 50 #spike cutoff value
+
+k: 3
+
+v: -60 #membrane potential
+u: 0 #recovery current
