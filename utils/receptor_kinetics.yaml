@@ -2,3 +2,8 @@ tau_ampa: 5
 tau_nmda: 100
 tau_gabaa: 6
 tau_gabab: 150
+
+g_ampa: 0.45
+g_nmda: 0.4
+g_gabaa: 0.3
+g_gabab: 0.05

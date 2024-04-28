@@ -1,16 +1,5 @@
 sigma: 14.4
-
-g_ee_ampa: 0.14 #changed, was 0.14
-g_ee_nmda: 2.1 #changed, was 2.1
-g_ei_ampa: 0.72 #changed, was 0.72
-g_ei_nmda: 1.9 #changed, was 1.9
-g_ie_gabaa: 7.8 #changed, was 7.8
-g_ie_gabab: 7.8 #changed, was 7.8
-g_ii_gabaa: 4.4 #changed, was 4.4
-g_ii_gabab: 4.4 #changed, was 4.4
-
-j_ee: 2 #changed, was 2
-j_ei: 0.5 #changed, was 0.5
-j_ie: 1.4 #changed, was 1.4
-j_ii: 1.9 #changed, was 1.9
-j: 0
+j_ee: 1
+j_ei: 0.3
+j_ie: 0.25
+j_ii: 0.55

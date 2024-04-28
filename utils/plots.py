@@ -1,6 +1,7 @@
 import numpy as np #data manipulations
 import plotly.subplots as sp #visualizations
 import plotly.graph_objs as go #visualizations
+from plotly.subplots import make_subplots #visualizations
 
 #LaTeX workaround
 import plotly
@@ -52,27 +53,104 @@ def plot_all_membrane_voltage(v: np.array, T: np.array):
     return fig
 
 
-def firing_rates(firings: np.ndarray, T: np.ndarray):
+def firing_rates(firings: np.ndarray, seconds: float, delta_T: float, stim_start: list, stim_end: list, title = "Spikes"):
     """Plots all firing times as raster plot."""
 
-    fig = go.Figure()
+    layout = go.Layout(
+    xaxis=dict(
+        rangeslider=dict(visible=False)
+    ),
+    yaxis=dict(
+        layer="below traces"
+    )
+    )
+
+    fig = go.Figure(layout=layout)
 
     firing_indices = np.argwhere(firings == 1)
 
-    trace = go.Scatter(x=firing_indices[:, 0], y=firing_indices[:, 1],
+    trace = go.Scatter(x=firing_indices[:, 0] * delta_T / 1000, y=firing_indices[:, 1],
                            mode='markers', marker=dict(color='black', size=4))
+    
+    for t_stim_start, t_stim_end in zip(stim_start, stim_end):
+        fig.add_vrect(
+        x0=t_stim_start,
+        x1=t_stim_end,
+        fillcolor="white",
+        opacity=0.6,
+        line_width=0,
+        layer="below"
+        )
+
+        fig.add_shape(
+            type="line",
+        x0=t_stim_start,
+        x1=t_stim_end,
+        y0=-0.15,
+        y1=-0.15,
+        line=dict(
+        color="red",
+        width=5,
+        ),
+        yref="blue",
+    )   
 
     fig.add_trace(trace)
 
     fig.update_layout(
-    xaxis_title='Time Step',
+    xaxis_title='Time (in s)',
     yaxis_title='Neuron',
-    title='Raster Plot',
-    yaxis=dict(tickmode='array', tickvals=list(range(firings.shape[1])), ticktext=list(range(1, firings.shape[1] + 1)))
+    title=title,
     )
 
 
     return trace, fig
+
+def exc_inh_firing_rates(exc_firings: np.ndarray, inh_firings: np.ndarray, stim_start: list, stim_end: list, delta_T: float, title = "Spikes"):
+    """Plots all firing times as raster plot."""
+
+    fig = make_subplots(rows=2, cols=1, shared_xaxes=True, subplot_titles=("Excitatory neurons spikes", "Inhibitory neurons spikes"))
+
+
+    exc_firing_indices = np.argwhere(exc_firings == 1)
+    inh_firing_indices = np.argwhere(inh_firings == 1)
+    trace_1 = go.Scatter(x=exc_firing_indices[:, 0] * delta_T / 1000, y=exc_firing_indices[:, 1], mode='markers', marker=dict(color='blue', size=4))
+    trace_2 = go.Scatter(x=inh_firing_indices[:, 0] * delta_T / 1000, y=inh_firing_indices[:, 1], mode='markers', marker=dict(color='red', size=4))
+
+    fig.add_trace(trace_1, row=1, col=1)
+    fig.add_trace(trace_2, row=2, col=1)
+
+    for t_stim_start, t_stim_end in zip(stim_start, stim_end):
+        fig.add_vrect(
+        x0=t_stim_start,
+        x1=t_stim_end,
+        fillcolor="white",
+        opacity=0.6,
+        line_width=0,
+        layer="below"
+        )
+        fig.add_shape(
+        type="line",
+        x0=t_stim_start,
+        x1=t_stim_end,
+        y0=-0.05,
+        y1=-0.05,
+        line=dict(
+        color="blue",
+        width=5,
+        ),
+        yref="paper",
+        )   
+
+    fig.update_layout(
+    xaxis_title='Time (in s)',
+    xaxis2_title='Time (in s)',
+    yaxis_title='Neuron',
+    title=title,
+    yaxis2_title='Neuron',
+    )
+
+    return fig
 
 def plot_membrane_voltage_against_recovery(voltage: np.array, recovery_variable: np.array):
     """Plots membrane voltage against recovery variable progression over the time forming dynamical plot.
