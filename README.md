@@ -28,3 +28,12 @@ All of the relevant files to the implementation and experiments can be divided i
 | `spontaneous_state.ipynb`         | Simulation of the spontaneous state activity in the network (Section 5.1).                                         |
 | `attractor_state.ipynb`           | Simulation of the attractor state activity in the network (Section 5.1).                                           |
 | `attractor_state_serotonin.ipynb` | Simulation of the attractor state activity in the network for different concentrations of serotonin (Section 5.2). |
+
+## 🛠️ Set up
+
+You can clone repository and explore it locally:
+
+1. `git clone git@github.com:glibesyck/Undergradute-Thesis-Serotonin-Neuromodulation-Attention-Modeling.git`
+2. `pip install -r requirements.txt`
+
+Alternatively, there is [interactive environment](https://mybinder.org/v2/gh/glibesyck/Undergradute-Thesis-Serotonin-Neuromodulation-Attention-Modeling/HEAD) in Binder where you can do that without any additional installments.
