@@ -8,7 +8,7 @@ Attention is the ability to flexibly allocate a limited amount of computational 
 
 In this study, we develop a computational model of a ring attractor network consisting of RS excitatory neurons and FS inhibitory interneurons. When presented with external stimuli, the circuit is able to transfer from the spontaneous state to the attractor one, which remembers the stimuli even after their removal. Then, we assess the serotonin's impact on the dynamics of the network by changing its concentration. We reveal that decreased and increased levels of 5-HT impair the network's ability to remember the stimuli; however, this is due to different changes in its qualitative behavior, which aligns with the available literature on serotonin's modulation function.
 
-![](images/serotonin-impact.png)
+![Illustrative diagram which describes experiment design as well as outlines main qualitative features of the network's behavior for distinct serotonin concentrations.](images/serotonin-impact.png)
 
 ## 🗂️ Repository Organization
 
@@ -20,14 +20,15 @@ All of the relevant files to the implementation and experiments can be divided i
 
 - simulation trials files (`*.ipynb`, located in root folder), where each of the notebooks presents separate experiment. These notebooks are self-explanatory inside, still the general overview is the following:
 
-| Notebook                          | Description                                                                                                        |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `excitatory_neuron.ipynb`         | Simulation of one RS excitatory neuron which receives DC current (test for Izhikevich's parameters).               |
-| `inhibitory_neuron.ipynb`         | Simulation of one FS inhibitory interneuron which receives DC current (test for Izhikevich's parameters).          |
-| `receptor_kinetics.ipynb`         | Simulation of the simultaneous spiking in FS and RS neuron to observe the dynamics of the receptor kinetics.       |
-| `spontaneous_state.ipynb`         | Simulation of the spontaneous state activity in the network (Section 5.1).                                         |
-| `attractor_state.ipynb`           | Simulation of the attractor state activity in the network (Section 5.1).                                           |
-| `attractor_state_serotonin.ipynb` | Simulation of the attractor state activity in the network for different concentrations of serotonin (Section 5.2). |
+| Notebook                          | Description                                                                                                                          |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `excitatory_neuron.ipynb`         | Simulation of one RS excitatory neuron which receives DC current (test for Izhikevich's parameters).                                 |
+| `inhibitory_neuron.ipynb`         | Simulation of one FS inhibitory interneuron which receives DC current (test for Izhikevich's parameters).                            |
+| `receptor_kinetics.ipynb`         | Simulation of the simultaneous spiking in FS and RS neuron to observe the dynamics of the receptor kinetics.                         |
+| `spontaneous_state.ipynb`         | Simulation of the spontaneous state activity in the network (Section 5.1).                                                           |
+| `attractor_state.ipynb`           | Simulation of the attractor state activity in the network (Section 5.1).                                                             |
+| `attractor_state_serotonin.ipynb` | Simulation of the attractor state activity in the network for different concentrations of serotonin (Section 5.2).                   |
+| `animaions.ipynb`                 | Simulation of the attractor state activity in the network for different concentrations of serotonin for creating GIF-visualizations. |
 
 ## 🛠️ Set up
 
@@ -37,3 +38,23 @@ You can clone repository and explore it locally:
 2. `pip install -r requirements.txt`
 
 Alternatively, there is [interactive environment](https://mybinder.org/v2/gh/glibesyck/Undergradute-Thesis-Serotonin-Neuromodulation-Attention-Modeling/HEAD) in Binder where you can do that without any additional installments.
+
+## 🎯 Results
+
+Network's dynamics allow it to exhibit attractor state after the removal of the stimuli. Moreover, we can notice the increased, and what is even more important, synchronized activity of the inhibitory neurons, which is crucial for successful attention allocation from the experimental findings
+
+![](images/normal_serotonin.gif)
+
+Computational odel suggests that higher doses of 5-HT compromise the network's ability to sustain attention resources over longer periods, which results in an abrupt transition to the spontaneous state activity (forgetting of the stimuli). Observe the interactive visualization for $\mu = 0.97$.
+
+![](images/increased_serotonin.gif)
+
+A slight lowering of the 5-HT level (for $\mu = 1.01$) is generally plausible and keeps firing rates of the neurons as desired, even increasing them for more, which might suggest better stability in the long-term perspective.
+
+![](images/slightly_decreased_serotonin.gif)
+
+However, further decrease (for $\mu = 1.02$) causes the circuit to locate itself in the state of the overstimulated excitation where inhibitory neurons almost do not fire at all, while, in contrast, all excitatory neurons fire at extremely elevated rates.
+
+![](images/decreased_serotonin.gif)
+
+Thus, the network's deficiency in the performance for successful attention allocation comes from the distinct dynamics being evolved in elevated and lowered serotonin levels.
